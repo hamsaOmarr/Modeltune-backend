@@ -5,7 +5,13 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: true, // Or use your origin 'https://desolate-reaches-15214.herokuapp.com' explicitly here, whichever works xD
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // For sending cookies from server to client
+  })
+);
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -27,7 +33,6 @@ prisma
   .$connect()
   .then(() => console.log("Prisma Connection established"))
   .catch((err) => console.log(err));
-
 
 const indexRouter = require("./routes/index.js");
 
