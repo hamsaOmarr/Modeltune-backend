@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 const corsOptions = {
-  origin: "https://modeltune.co",
+  origin: "https://www.modeltune.co",
 };
 
 app.use(cors(corsOptions));
