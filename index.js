@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 //   origin: "https://www.modeltune.co",
 // };
 
-// app.use(cors(corsOptions));
+app.use(cors());
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
