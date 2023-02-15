@@ -5,13 +5,11 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(
-  cors({
-    origin: true, // Or use your origin 'https://desolate-reaches-15214.herokuapp.com' explicitly here, whichever works xD
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true, // For sending cookies from server to client
-  })
-);
+const corsOptions = {
+  origin: "https://modeltune.co",
+};
+
+app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
