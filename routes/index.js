@@ -5,13 +5,13 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.get("/", async (req, res) => {
-  // await prisma.email
-  //   .findMany()
-  //   .then((emails) => {
-  //     res.json(emails);
-  //     console.log("Email List sent from DB");
-  //   })
-  //   .catch((err) => console.log(err));
+  await prisma.email
+    .findMany()
+    .then((emails) => {
+      res.json(emails);
+      console.log("Email List sent from DB");
+    })
+    .catch((err) => console.log(err));
 });
 
 router.post("/", async (req, res) => {
@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
       res.json("Thank you! Your submittion has been received!");
 
       const msg = {
-        to: "test-sx7ibok5t@srv1.mail-tester.com", // Change to your recipient
+        to: req.body.Email, // Change to your recipient
         from: {
           email: "hamsa@modeltune.co",
           name: "Hamsa (Modeltune)",
