@@ -5,11 +5,20 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT || 5001;
 
-const corsOptions = {
-  origin: "https://www.modeltune.co",
-};
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://www.modeltune.co"); // update to match the domain you will make the request from
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "https://www.modeltune.co",
+// };
+
+// app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
