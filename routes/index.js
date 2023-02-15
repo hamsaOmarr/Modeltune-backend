@@ -4,7 +4,7 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-router.get("/", async (req, res) => {
+router.get("/db-data", async (req, res) => {
   await prisma.email
     .findMany()
     .then((emails) => {
