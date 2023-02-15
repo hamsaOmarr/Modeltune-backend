@@ -19,11 +19,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-// const corsOptions = {
-//   origin: "https://www.modeltune.co",
-// };
+const corsOptions = {
+  origin: "https://www.modeltune.co",
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
