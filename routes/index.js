@@ -25,9 +25,24 @@ router.post("/", async (req, res) => {
         from: {
           email: "hamsa@modeltune.co",
           name: "Hamsa (Modeltune)",
-        }, // Change to your verified sender
+        },
         // template_id: process.env.SENDGRID_TEMPLATE_ID,
-        html: `<div><div style="font-family: inherit; text-align: inherit;">Hi there,</div><div style="font-family: inherit; text-align: inherit;"><br>We are so excited to see you on this list! We've been working hard to get Modeltune into your hands as soon as possible, and we hope you'll join us in Discord or reply to this email if you have any ideas for what you'd like to see from the platform. We're always open to feedback and suggestions.</div><div style="font-family: inherit; text-align: inherit;"><br></div><div style="font-family: inherit; text-align: inherit;">Also, we are looking for individuals with high-quality fine-tuned models that they would like to see on the platform so if that is you, shoot us an email.</div><div style="font-family: inherit; text-align: inherit;"><br>Thank you again for your interest in Modeltune and we look forward to hearing from you soon!</div><div style="font-family: inherit; text-align: inherit;"><br></div><div style="font-family: inherit; text-align: inherit;">Discord:&nbsp;<a href="https://discord.gg/6YyE7WWfCM" target="_blank">https://discord.gg/6YyE7WWfCM</a></div></div>`,
+        subject: "You've joined our Waitlist!",
+        text: `Hi there,
+
+We are so excited to see you on this list! We've been working hard to get Modeltune into your hands as soon as possible, and we hope you'll join us in Discord or reply to this email if you have any ideas for what you'd like to see from the platform. We're always open to feedback and suggestions.
+
+Also, we are looking for individuals with high-quality fine-tuned models that they would like to see on the platform so if that is you, shoot us an email.
+
+Thank you again for your interest in Modeltune and we look forward to hearing from you soon!
+
+We read an reply to all user emails. 
+
+Discord: https://discord.gg/6YyE7WWfCM
+
+--
+Hamsa Omar
+Founder at Modeltune`,
       };
 
       sgMail
