@@ -13,7 +13,7 @@ const sgMail = require("@sendgrid/mail");
 // });
 
 router.post("/", async (req, res) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  sgMail.setApiKey("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");
 
   await prisma.email
     .create({ data: { email: req.body.Email } })
