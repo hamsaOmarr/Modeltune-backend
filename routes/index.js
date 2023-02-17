@@ -2,8 +2,6 @@ const router = require("express").Router();
 const prisma = require("../prisma.js");
 const sgMail = require("@sendgrid/mail");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 router.get("/", async (req, res) => {
   await prisma.email
     .findMany()
@@ -15,6 +13,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
   await prisma.email
     .create({ data: { email: req.body.Email } })
     .then(async () => {
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
         from: {
           email: "hamsa@modeltune.co",
           name: "Hamsa (Modeltune)",
-        }, 
+        },
         // template_id: process.env.SENDGRID_TEMPLATE_ID,
         subject: "You've joined our Waitlist!",
         text: `Hi there,
