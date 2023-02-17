@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   await prisma.email
     .create({ data: { email: req.body.Email } })
-    .then(() => {
+    .then(async () => {
       res.json("Thank you! Your submittion has been received!");
 
       const msg = {
@@ -45,7 +45,7 @@ Hamsa Omar
 Founder at Modeltune`,
       };
 
-      sgMail
+      await sgMail
         .send(msg)
         .then(() => {
           console.log("Email sent");
