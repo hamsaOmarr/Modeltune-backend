@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const prisma = require("../prisma.js");
-const sgMail = require("@sendgrid/mail");
+// const sgMail = require("@sendgrid/mail");
+const postmark = require("postmark");
 
 // router.get("/", async (req, res) => {
 //   await prisma.email
@@ -12,23 +13,29 @@ const sgMail = require("@sendgrid/mail");
 //     .catch((err) => console.log(err));
 // });
 
+const pmMail = new postmark.ServerClient(
+  "805533b5-042f-4b30-809e-56375972c923"
+);
+
 router.post("/", async (req, res) => {
-  sgMail.setApiKey("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");
+  // sgMail.setApiKey(
+  //   "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"
+  // );
 
   await prisma.email
     .create({ data: { email: req.body.Email } })
     .then(async () => {
       res.json("Thank you! Your submittion has been received!");
 
-      const msg = {
-        to: req.body.Email, // Change to your recipient
-        from: {
-          email: "hamsa@modeltune.co",
-          name: "Hamsa (Modeltune)",
-        },
-        // template_id: process.env.SENDGRID_TEMPLATE_ID,
-        subject: "You've joined our Waitlist!",
-        text: `Hi there,
+      const pmMsg = {
+        To: req.body.Email, // Change to your recipient
+        // From: {
+        //   email: "hamsa@modeltune.co",
+        //   name: "Hamsa (Modeltune)",
+        // },
+        From: "Hamsa (Modeltune) hamsa@modeltune.co",
+        Subject: "You've joined our Waitlist!",
+        TextBody: `Hi there,
 
 We are so excited to see you on this list! We've been working hard to get Modeltune into your hands as soon as possible, and we hope you'll join us in Discord or reply to this email if you have any ideas for what you'd like to see from the platform. We're always open to feedback and suggestions.
 
@@ -45,8 +52,42 @@ Hamsa Omar
 Founder at Modeltune`,
       };
 
-      await sgMail
-        .send(msg)
+      //       const sgMsg = {
+      //         to: req.body.Email, // Change to your recipient
+      //         from: {
+      //           email: "hamsa@modeltune.co",
+      //           name: "Hamsa (Modeltune)",
+      //         },
+      //         // template_id: process.env.SENDGRID_TEMPLATE_ID,
+      //         subject: "You've joined our Waitlist!",
+      //         text: `Hi there,
+
+      // We are so excited to see you on this list! We've been working hard to get Modeltune into your hands as soon as possible, and we hope you'll join us in Discord or reply to this email if you have any ideas for what you'd like to see from the platform. We're always open to feedback and suggestions.
+
+      // Also, we are looking for individuals with high-quality fine-tuned models that they would like to see on the platform so if that is you, shoot us an email.
+
+      // Thank you again for your interest in Modeltune and we look forward to hearing from you soon!
+
+      // We read an reply to all user emails.
+
+      // Discord: https://discord.gg/6YyE7WWfCM
+
+      // --
+      // Hamsa Omar
+      // Founder at Modeltune`,
+      //       };
+
+      // await sgMail
+      //   .send(sgMsg)
+      //   .then(() => {
+      //     console.log("Email sent");
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
+      await pmMail
+        .sendEmail(pmMsg)
         .then(() => {
           console.log("Email sent");
         })
