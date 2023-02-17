@@ -2,8 +2,6 @@ const router = require("express").Router();
 const prisma = require("../prisma.js");
 const sgMail = require("@sendgrid/mail");
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
 // router.get("/", async (req, res) => {
 //   await prisma.email
 //     .findMany()
@@ -15,6 +13,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 // });
 
 router.post("/", async (req, res) => {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
   await prisma.email
     .create({ data: { email: req.body.Email } })
     .then(async () => {
