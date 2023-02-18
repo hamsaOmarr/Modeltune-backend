@@ -14,9 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const pmMail = new postmark.ServerClient(
-    "805533b5-042f-4b30-809e-56375972c923"
-  );
+  const pmMail = new postmark.ServerClient(process.env.POSTMARK_API_KEY);
   // sgMail.setApiKey(
   //   "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"
   // );
