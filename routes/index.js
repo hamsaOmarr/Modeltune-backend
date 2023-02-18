@@ -13,11 +13,10 @@ router.get("/", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
-const pmMail = new postmark.ServerClient(
-  "805533b5-042f-4b30-809e-56375972c923"
-);
-
 router.post("/", async (req, res) => {
+  const pmMail = new postmark.ServerClient(
+    "805533b5-042f-4b30-809e-56375972c923"
+  );
   // sgMail.setApiKey(
   //   "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"
   // );
@@ -29,10 +28,6 @@ router.post("/", async (req, res) => {
 
       const pmMsg = {
         To: req.body.Email, // Change to your recipient
-        // From: {
-        //   email: "hamsa@modeltune.co",
-        //   name: "Hamsa (Modeltune)",
-        // },
         From: "Hamsa (Modeltune) hamsa@modeltune.co",
         Subject: "You've joined our Waitlist!",
         TextBody: `Hi there,
