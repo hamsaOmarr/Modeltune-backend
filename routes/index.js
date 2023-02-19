@@ -41,6 +41,7 @@ Founder at Modeltune`,
   await prisma.email
     .create({ data: { email: req.body.Email } })
     .then(async () => {
+      console.log("User email saved to DB");
       res.json("Thank you! Your submittion has been received!");
 
       await pmMail
