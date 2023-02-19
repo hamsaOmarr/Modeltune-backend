@@ -55,6 +55,7 @@ Founder at Modeltune`,
     })
     .catch((err) => {
       if (err.code === "P2002") {
+        console.log("Already in Waitlist");
         res.json("You are already in our Waitlist");
       } else {
         console.log(err);
