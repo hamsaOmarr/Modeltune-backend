@@ -31,7 +31,7 @@ Thank you again for your interest in Modeltune and we look forward to hearing fr
 
 We read an reply to all user emails. 
 
-Discord: https://discord.gg/6YyE7WWfCM
+Discord: https://discord.gg/V9XXAbJDKQ
 
 --
 Hamsa Omar
