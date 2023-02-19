@@ -31,7 +31,7 @@ Thank you again for your interest in Modeltune and we look forward to hearing fr
 
 We read an reply to all user emails. 
 
-Discord: https://discord.gg/6YyE7WWfCM
+Discord: https://discord.gg/V9XXAbJDKQ
 
 --
 Hamsa Omar
@@ -42,7 +42,6 @@ Founder at Modeltune`,
     .create({ data: { email: req.body.Email } })
     .then(async () => {
       console.log("User email saved to DB");
-      res.json("Thank you! Your submittion has been received!");
 
       await pmMail
         .sendEmail(pmMsg)
@@ -52,6 +51,7 @@ Founder at Modeltune`,
         .catch((err) => {
           console.log(err);
         });
+      res.json("Thank you! Your submittion has been received!");
     })
     .catch((err) => {
       if (err.code === "P2002") {
