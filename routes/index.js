@@ -1,10 +1,8 @@
 const router = require("express").Router();
 const prisma = require("../prisma.js");
-const postmark = require("postmark");
+const sgMail = require("@sendgrid/mail");
 
-const pmMail = new postmark.ServerClient(
-  "805533b5-042f-4b30-809e-56375972c923"
-);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.get("/", async (req, res) => {
   await prisma.email
@@ -17,11 +15,14 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const pmMsg = {
-    To: req.body.Email, // Change to your recipient
-    From: "Hamsa (Modeltune) hamsa@modeltune.co",
-    Subject: "You've joined our Waitlist!",
-    TextBody: `Hi there,
+  const sgMsg = {
+    to: req.body.Email, // Change to your recipient
+    from: {
+      email: "hamsa@modeltune.co",
+      name: "Hamsa (Modeltune)",
+    },
+    subject: "You've joined our Waitlist!",
+    text: `Hi there,
 
 We are so excited to see you on this list! We've been working hard to get Modeltune into your hands as soon as possible, and we hope you'll join us in Discord or reply to this email if you have any ideas for what you'd like to see from the platform. We're always open to feedback and suggestions.
 
@@ -43,8 +44,8 @@ Founder at Modeltune`,
     .then(async () => {
       console.log("User email saved to DB");
 
-      await pmMail
-        .sendEmail(pmMsg)
+      await sgMail
+        .send(sgMsg)
         .then(() => {
           console.log("Email sent");
         })
