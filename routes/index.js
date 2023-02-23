@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     .findMany()
     .then((emails) => {
       res.json(emails);
-      console.log("Email List sent from DB");
+      console.log(emails.length + " Emails sent from DB");
     })
     .catch((err) => console.log(err));
 });
