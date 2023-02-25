@@ -65,7 +65,7 @@ Founder at Modeltune`,
     });
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/users", async (req, res) => {
   await prisma.email
     .deleteMany()
     .then(() => {
@@ -76,6 +76,20 @@ router.delete("/", async (req, res) => {
       console.log(err);
       res.json(err);
     });
+});
+
+router.delete("/users/:userEmail", async (req, res) => {
+  const userEmail = req.params.userEmail;
+
+  await prisma.email
+    .delete({
+      where: { email: userEmail },
+    })
+    .then(() => {
+      res.json("User has been Deleted");
+      console.log("User has been Deleted");
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
