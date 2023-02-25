@@ -4,16 +4,6 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// router.get("/", async (req, res) => {
-//   await prisma.email
-//     .findMany()
-//     .then((emails) => {
-//       res.json(emails);
-//       console.log("Email List sent from DB");
-//     })
-//     .catch((err) => console.log(err));
-// });
-
 router.post("/", async (req, res) => {
   const sgMsg = {
     to: req.body.Email, // Change to your recipient
@@ -64,18 +54,5 @@ Founder at Modeltune`,
       }
     });
 });
-
-// router.delete("/", async (req, res) => {
-//   await prisma.email
-//     .deleteMany()
-//     .then(() => {
-//       res.json("All Emails have been Deleted");
-//       console.log("All Emails have been Deleted");
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.json(err);
-//     });
-// });
 
 module.exports = router;
