@@ -14,6 +14,20 @@ router.get("/", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
+router.get("/users/:userEmail", async (req, res) => {
+  const userEmail = req.params.userEmail;
+
+  await prisma.email
+    .findUnique({
+      where: { email: userEmail },
+    })
+    .then((email) => {
+      res.json(email);
+      console.log("User has been Found");
+    })
+    .catch((err) => console.log(err));
+});
+
 router.post("/", async (req, res) => {
   const sgMsg = {
     to: req.body.Email, // Change to your recipient
