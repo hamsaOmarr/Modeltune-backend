@@ -5,7 +5,7 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.get("/", async (req, res) => {
-  await prisma.email
+  await prisma.devemail
     .findMany()
     .then((emails) => {
       res.json(emails);
@@ -38,22 +38,18 @@ router.post("/", async (req, res) => {
     subject: "You've joined our Waitlist!",
     text: `Hi there,
 
-We are so excited to see you on this list! We've been working hard to get Modeltune into your hands as soon as possible, and we hope you'll join us in Discord or reply to this email if you have any ideas for what you'd like to see from the platform. We're always open to feedback and suggestions.
-
-Also, we are looking for individuals with high-quality fine-tuned models that they would like to see on the platform so if that is you, shoot us an email.
+We are so excited to see you on this list! We're working hard to get Modeltune into your hands as soon as possible and we're always open to feedback and suggestions.
 
 Thank you again for your interest in Modeltune and we look forward to hearing from you soon!
 
 We read an reply to all user emails. 
-
-Discord: https://discord.gg/V9XXAbJDKQ
 
 --
 Hamsa Omar
 Founder at Modeltune`,
   };
 
-  await prisma.email
+  await prisma.devemail
     .create({ data: { email: req.body.Email } })
     .then(async () => {
       console.log("User email saved to DB");
