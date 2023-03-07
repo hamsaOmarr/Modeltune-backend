@@ -5,7 +5,7 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 router.get("/", async (req, res) => {
-  await prisma.email
+  await prisma.devemail
     .findMany()
     .then((emails) => {
       res.json(emails);
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 router.get("/users/:userEmail", async (req, res) => {
   const userEmail = req.params.userEmail;
 
-  await prisma.email
+  await prisma.devemail
     .findUnique({
       where: { email: userEmail },
     })
@@ -49,7 +49,7 @@ Hamsa Omar
 Founder at Modeltune`,
   };
 
-  await prisma.email
+  await prisma.devemail
     .create({ data: { email: req.body.Email } })
     .then(async () => {
       console.log("User email saved to DB");
@@ -76,7 +76,7 @@ Founder at Modeltune`,
 });
 
 router.delete("/users", async (req, res) => {
-  await prisma.email
+  await prisma.devemail
     .deleteMany()
     .then(() => {
       res.json("All Emails have been Deleted");
@@ -91,7 +91,7 @@ router.delete("/users", async (req, res) => {
 router.delete("/users/:userEmail", async (req, res) => {
   const userEmail = req.params.userEmail;
 
-  await prisma.email
+  await prisma.devemail
     .delete({
       where: { email: userEmail },
     })

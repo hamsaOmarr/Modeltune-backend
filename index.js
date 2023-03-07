@@ -42,8 +42,10 @@ prisma
   .catch((err) => console.log(err));
 
 const indexRouter = require("./routes/index.js");
+const devRouter = require("./routes/dev.js");
 
 app.use("/", indexRouter);
+app.use("/dev", devRouter);
 
 app.listen(port, () => {
   console.log("Listening on port " + port);
