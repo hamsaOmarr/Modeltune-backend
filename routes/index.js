@@ -55,33 +55,7 @@ Founder at Modeltune`,
     });
 });
 
-
-// Dev routes 
-
-
-router.get("/dev", async (req, res) => {
-  await prisma.devemail
-    .findMany()
-    .then((emails) => {
-      res.json(emails);
-      console.log(emails.length + " Emails sent from DB");
-    })
-    .catch((err) => console.log(err));
-});
-
-router.get("/dev/users/:userEmail", async (req, res) => {
-  const userEmail = req.params.userEmail;
-
-  await prisma.devemail
-    .findUnique({
-      where: { email: userEmail },
-    })
-    .then((email) => {
-      res.json(email);
-      console.log("User has been Found");
-    })
-    .catch((err) => console.log(err));
-});
+// Dev routes
 
 router.post("/dev", async (req, res) => {
   const sgMsg = {
@@ -129,34 +103,5 @@ Founder at Modeltune`,
       }
     });
 });
-
-router.delete("/dev/users", async (req, res) => {
-  await prisma.devemail
-    .deleteMany()
-    .then(() => {
-      res.json("All Emails have been Deleted");
-      console.log("All Emails have been Deleted");
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json(err);
-    });
-});
-
-router.delete("/dev/users/:userEmail", async (req, res) => {
-  const userEmail = req.params.userEmail;
-
-  await prisma.devemail
-    .delete({
-      where: { email: userEmail },
-    })
-    .then(() => {
-      res.json("User has been Deleted");
-      console.log("User has been Deleted");
-    })
-    .catch((err) => console.log(err));
-});
-
-
 
 module.exports = router;
