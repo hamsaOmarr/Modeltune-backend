@@ -4,7 +4,7 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-router.get("/", async (req, res) => {
+router.get("/dev", async (req, res) => {
   await prisma.devemail
     .findMany()
     .then((emails) => {
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/users/:userEmail", async (req, res) => {
+router.get("/dev/users/:userEmail", async (req, res) => {
   const userEmail = req.params.userEmail;
 
   await prisma.devemail
@@ -28,7 +28,7 @@ router.get("/users/:userEmail", async (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.post("/", async (req, res) => {
+router.post("/dev", async (req, res) => {
   const sgMsg = {
     to: req.body.Email, // Change to your recipient
     from: {
@@ -75,7 +75,7 @@ Founder at Modeltune`,
     });
 });
 
-router.delete("/users", async (req, res) => {
+router.delete("/dev/users", async (req, res) => {
   await prisma.devemail
     .deleteMany()
     .then(() => {
@@ -88,7 +88,7 @@ router.delete("/users", async (req, res) => {
     });
 });
 
-router.delete("/users/:userEmail", async (req, res) => {
+router.delete("/dev/users/:userEmail", async (req, res) => {
   const userEmail = req.params.userEmail;
 
   await prisma.devemail

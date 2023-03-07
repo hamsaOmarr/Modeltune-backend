@@ -45,7 +45,7 @@ const indexRouter = require("./routes/index.js");
 const devRouter = require("./routes/dev.js");
 
 app.use("/", indexRouter);
-app.use("/dev", devRouter);
+app.use("/", devRouter);
 
 app.listen(port, () => {
   console.log("Listening on port " + port);
